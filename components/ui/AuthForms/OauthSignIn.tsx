@@ -20,16 +20,16 @@ export default function OauthSignIn() {
       displayName: 'Google',
       icon: <Google className="h-5 w-5" />
     },
-    {
-      name: 'twitter',
-      displayName: 'Twitter',
-      icon: <X className="h-5 w-5" />
-    },
-    {
-      name: 'facebook',
-      displayName: 'Facebook',
-      icon: <Facebook className="h-5 w-5" />
-    },
+    // {
+    //   name: 'twitter',
+    //   displayName: 'Twitter',
+    //   icon: <X className="h-5 w-5" />
+    // },
+    // {
+    //   name: 'facebook',
+    //   displayName: 'Facebook',
+    //   icon: <Facebook className="h-5 w-5" />
+    // },
     {
       name: 'github',
       displayName: 'GitHub',

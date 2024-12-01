@@ -19,7 +19,7 @@ export default function Navlinks({ user }: NavlinksProps) {
     <div className="relative flex flex-row justify-between py-4 align-center md:py-6">
 
       <div className="flex items-center flex-1 ">
-      <Link href="/" className={s.logo} aria-label="Logo">
+        <Link href="/" className={s.logo} aria-label="Logo">
           <Logo />
         </Link>
         <nav className="ml-6 space-x-2 lg:block">
@@ -29,19 +29,24 @@ export default function Navlinks({ user }: NavlinksProps) {
           <Link href="/free-apis" className={s.link}>
             Free
           </Link>
-          <Link href="/paid-apis" className={s.link}>
+          {/* <Link href="/paid-apis" className={s.link}>
             Paid
-          </Link>
+          </Link> */}
           <Link href="/docs" className={s.link}>
             Docs
           </Link>
-          <Link href="/pricing" className={s.link}>
+          {/* <Link href="/pricing" className={s.link}>
             Pricing
-          </Link>
+          </Link> */}
           {user && (
-            <Link href="/account" className={s.link}>
-              Account
-            </Link>
+            <>
+              <Link href="/account" className={s.link}>
+                Account
+              </Link>
+              <Link href="/api-credentials" className={s.link}>
+                Api Credentials
+              </Link>
+            </>
           )}
         </nav>
 
@@ -49,11 +54,11 @@ export default function Navlinks({ user }: NavlinksProps) {
       <div className="flex justify-end space-x-8">
         {user ? (
           <form onSubmit={(e) => handleRequest(e, SignOut, router)}>
-          <input type="hidden" name="pathName" value={usePathname() || "/"} />
-          <button type="submit" className={s.link}>
-            Sign out
-          </button>
-        </form>
+            <input type="hidden" name="pathName" value={usePathname() || "/"} />
+            <button type="submit" className={s.link}>
+              Sign out
+            </button>
+          </form>
         ) : (
           <Link href="/signin" className={s.link}>
             Sign In

@@ -1,12 +1,13 @@
 import { createClient } from '../../utils/supabase/server';
-import CustomerPortalForm from '../../components/ui/AccountForms/CustomerPortalForm';
-import EmailForm from '../../components/ui/AccountForms/EmailForm';
-import NameForm from '../../components/ui/AccountForms/NameForm';
 import { redirect } from 'next/navigation';
 import { getUser, getUserDetails } from '../../utils/supabase/queries';
+import PublicKey from '../../components/ui/CredentialsForms/PublicKey';
+import PlartFormID from '../../components/ui/CredentialsForms/PlartformId';
+import DerivID from '../../components/ui/CredentialsForms/DerivID';
+import Origins from '../../components/ui/CredentialsForms/Origins';
 
 
-export default async function Account() {
+export default async function Credentials() {
   const supabase = createClient();
   const [user, userDetails] = await Promise.all([
     getUser(supabase),
@@ -23,14 +24,16 @@ export default async function Account() {
       <div className="max-w-6xl px-4 py-8 mx-auto sm:px-6 sm:pt-24 lg:px-8">
         <div className="sm:align-center sm:flex sm:flex-col">
           <h1 className="text-4xl font-extrabold text-white sm:text-center sm:text-6xl">
-            Account
+            Api Credentials
           </h1>
         </div>
       </div>
       <div className="p-4">
-        {/* <CustomerPortalForm subscription={subscription} /> */}
-        <NameForm userName={user?.user_metadata.full_name ?? ''} />
-        <EmailForm userEmail={user.email} />
+        
+        <PublicKey userName={user?.user_metadata.full_name ?? ''} />
+        <PlartFormID userName={user?.user_metadata.full_name ?? ''} />
+        <DerivID userName={user?.user_metadata.full_name ?? ''} />
+        <Origins userName={user?.user_metadata.full_name ?? ''} />
       </div>
     </section>
   );
