@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import Button from '../Button';
+import { signInWithPassword } from '../../../utils/auth-helpers/server';
+import { handleRequest } from '../../../utils/auth-helpers/client';
 
 // Define prop type with allowEmail boolean
 interface PasswordSignInProps {
@@ -19,7 +21,8 @@ export default function PasswordSignIn({
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    setIsSubmitting(true); 
+    setIsSubmitting(true); // Disable the button while the request is being handled
+    await handleRequest(e, signInWithPassword, router);
     setIsSubmitting(false);
   };
 

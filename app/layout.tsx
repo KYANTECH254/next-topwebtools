@@ -1,11 +1,12 @@
 
 import { Metadata } from 'next';
 
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, Suspense } from 'react';
 import '../styles/main.css';
 import React from 'react';
 import Footer from '../components/ui/Footer';
 import Navbar from '../components/ui/NavBar';
+// import { Toaster } from '../components/ui/Toasts/toaster';
 
 const title = 'Topwetools';
 const description = 'All the tools you need.';
@@ -37,6 +38,9 @@ export default async function RootLayout({ children }: PropsWithChildren) {
                     {children}
                 </main>
                 <Footer />
+                {/* <Suspense>
+                    <Toaster />
+                </Suspense> */}
             </body>
         </html>
     );

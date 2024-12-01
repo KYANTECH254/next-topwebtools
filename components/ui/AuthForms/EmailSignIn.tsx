@@ -1,6 +1,8 @@
 'use client';
 
 import Link from 'next/link';
+import { signInWithEmail } from '../../../utils/auth-helpers/server';
+import { handleRequest } from '../../../utils/auth-helpers/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Button from '../Button';
@@ -22,6 +24,7 @@ export default function EmailSignIn({
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setIsSubmitting(true); 
+    await handleRequest(e, signInWithEmail, router);
     setIsSubmitting(false);
   };
 

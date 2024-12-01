@@ -1,13 +1,17 @@
+import { createClient } from '../../utils/supabase/server';
 import CustomerPortalForm from '../../components/ui/AccountForms/CustomerPortalForm';
 import EmailForm from '../../components/ui/AccountForms/EmailForm';
 import NameForm from '../../components/ui/AccountForms/NameForm';
 import { redirect } from 'next/navigation';
+import { getUser, getUserDetails } from '../../utils/supabase/queries';
 
 
 export default async function Account() {
-  const user = {} as any;
-  const userDetails = {} as any;
-  const subscription = {} as any;
+  const supabase = createClient();
+  const [user, userDetails] = await Promise.all([
+    getUser(supabase),
+    getUserDetails(supabase),
+  ]);
 
   if (!user) {
     return redirect('/signin');
@@ -23,7 +27,7 @@ export default async function Account() {
         </div>
       </div>
       <div className="p-4">
-        <CustomerPortalForm subscription={subscription} />
+        {/* <CustomerPortalForm subscription={subscription} /> */}
         <NameForm userName={userDetails?.full_name ?? ''} />
         <EmailForm userEmail={user.email} />
       </div>

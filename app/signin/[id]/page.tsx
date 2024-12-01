@@ -1,6 +1,7 @@
 
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { createClient } from '../../../utils/supabase/server';
 import Card from '../../../components/ui/Card';
 import PasswordSignIn from '../../../components/ui/AuthForms/PasswordSignIn';
 import EmailSignIn from '../../../components/ui/AuthForms/EmailSignIn';
@@ -11,6 +12,7 @@ import SignUp from '../../../components/ui/AuthForms/Signup';
 import UpdatePassword from '../../../components/ui/AuthForms/UpdatePassword';
 import { getAuthTypes, getViewTypes, getRedirectMethod, getDefaultSignInView } from '../../../utils/settings';
 import Logo from '../../../components/icons/Logo';
+
 
 export default async function SignIn({
   params,
@@ -31,9 +33,22 @@ export default async function SignIn({
     viewProp = params.id;
   } else {
     const preferredSignInView =
-      (await cookies()).get('preferredSignInView')?.value || null;
+      await cookies().get('preferredSignInView')?.value || null;
     viewProp = getDefaultSignInView(preferredSignInView);
     return redirect(`/signin/${viewProp}`);
+  }
+
+  // Check if the user is already logged in and redirect to the account page if so
+  const supabase = createClient();
+
+  const {
+    data: { user }
+  } = await supabase.auth.getUser();
+
+  if (user && viewProp !== 'update_password') {
+    return redirect('/');
+  } else if (!user && viewProp === 'update_password') {
+    return redirect('/signin');
   }
 
   return (

@@ -4,6 +4,8 @@ import Button from '../../../components/ui/Button';
 import Card from '../../../components/ui/Card';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { updateEmail } from '../../../utils/auth-helpers/server';
+import { handleRequest } from '../../../utils/auth-helpers/client';
 
 export default function EmailForm({
   userEmail
@@ -21,6 +23,7 @@ export default function EmailForm({
       setIsSubmitting(false);
       return;
     }
+    handleRequest(e, updateEmail, router);
     setIsSubmitting(false);
   };
 

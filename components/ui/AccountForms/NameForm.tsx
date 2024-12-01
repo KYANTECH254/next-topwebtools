@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Card from '../Card';
 import Button from '../Button';
+import { updateName } from '../../../utils/auth-helpers/server';
+import { handleRequest } from '../../../utils/auth-helpers/client';
 
 export default function NameForm({ userName }: { userName: string }) {
   const router = useRouter();
@@ -17,6 +19,7 @@ export default function NameForm({ userName }: { userName: string }) {
       setIsSubmitting(false);
       return;
     }
+    handleRequest(e, updateName, router);
     setIsSubmitting(false);
   };
 

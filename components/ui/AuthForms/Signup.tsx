@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Button from '../Button';
+import { signUp } from '../../../utils/auth-helpers/server';
+import { handleRequest } from '../../../utils/auth-helpers/client';
 
 // Define prop type with allowEmail boolean
 interface SignUpProps {
@@ -17,7 +19,8 @@ export default function SignUp({ allowEmail, redirectMethod }: SignUpProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    setIsSubmitting(true); 
+    setIsSubmitting(true); // Disable the button while the request is being handled
+    await handleRequest(e, signUp, router);
     setIsSubmitting(false);
   };
 

@@ -3,13 +3,17 @@ import React from 'react';
 import Link from 'next/link';
 import s from './Navbar.module.css';
 import Logo from '../../icons/Logo';
-
+import { SignOut } from '../../../utils/auth-helpers/server';
+import { handleRequest } from '../../../utils/auth-helpers/client';
+import { usePathname, useRouter } from 'next/navigation';
+import { getRedirectMethod } from '../../../utils/auth-helpers/settings';
 
 interface NavlinksProps {
   user?: any;
 }
 
 export default function Navlinks({ user }: NavlinksProps) {
+  const router = getRedirectMethod() === 'client' ? useRouter() : null;
 
   return (
     <div className="relative flex flex-row justify-between py-4 align-center md:py-6">
@@ -44,12 +48,12 @@ export default function Navlinks({ user }: NavlinksProps) {
       </div>
       <div className="flex justify-end space-x-8">
         {user ? (
-          <form >
-            <input type="hidden" name="pathName" />
-            <button type="submit" className={s.link}>
-              Sign out
-            </button>
-          </form>
+          <form onSubmit={(e) => handleRequest(e, SignOut, router)}>
+          <input type="hidden" name="pathName" value={usePathname() || "/"} />
+          <button type="submit" className={s.link}>
+            Sign out
+          </button>
+        </form>
         ) : (
           <Link href="/signin" className={s.link}>
             Sign In
