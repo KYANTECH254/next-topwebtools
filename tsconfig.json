@@ -29,7 +29,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "next.config.mjs", "server.js"  ],
+, "next.config.mjs", "server.js", "components/ui/EmailTemplate.jsx"  ],
   "exclude": [
     "node_modules"
   ]
