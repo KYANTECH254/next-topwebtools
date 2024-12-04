@@ -6,7 +6,7 @@ import React from 'react';
 import crypto from 'crypto';
 
 export async function POST(req: Request, res: Response) {
-    const secret:any = process.env.SUPABASE_WEBHOOK_SECRET; // Your Supabase webhook secret
+    const secret:any = process.env.SEND_EMAIL_HOOK_SECRET; // Your Supabase webhook secret
     const payload:any = await req.text();
     const signature = req.headers.get('x-supabase-signature'); // Supabase signature header
 
