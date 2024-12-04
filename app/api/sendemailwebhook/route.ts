@@ -3,16 +3,21 @@ import Email from '../../../components/ui/EmailTemplate';
 import { renderAsync } from '@react-email/components';
 // import { Webhook } from 'express-webhook';
 import React from 'react';
+import crypto from 'crypto';
 
 export async function POST(req: Request, res: Response) {
-    const req_body = await req.json();
+    const secret:any = process.env.SUPABASE_WEBHOOK_SECRET; // Your Supabase webhook secret
+    const payload:any = await req.text();
+    const signature = req.headers.get('x-supabase-signature'); // Supabase signature header
 
-    const hookSecret = process.env.SEND_EMAIL_HOOK_SECRET;
-    const payload:any = req.body;
-    const headers = req.headers;
+    // Verify the webhook signature
+    const computedSignature = crypto
+      .createHmac('sha256', secret)
+      .update(payload)
+      .digest('hex');
 
-    if (!headers['x-signature'] || headers['x-signature'] !== hookSecret) {
-        throw new Error('Invalid webhook signature');
+    if (signature !== computedSignature) {
+      return new Response('Invalid webhook signature', { status: 401 });
     }
 
     const transporter = nodemailer.createTransport({
