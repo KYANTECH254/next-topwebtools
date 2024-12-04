@@ -1,17 +1,19 @@
 import nodemailer from 'nodemailer';
 import Email from '../../../components/ui/EmailTemplate';
 import { renderAsync } from '@react-email/components';
-import { Webhook } from 'express-webhook';
+// import { Webhook } from 'express-webhook';
 import React from 'react';
 
 export async function POST(req: Request, res: Response) {
     const req_body = await req.json();
 
     const hookSecret = process.env.SEND_EMAIL_HOOK_SECRET;
-    const payload = req.body;
+    const payload:any = req.body;
     const headers = req.headers;
 
-    const wh = new Webhook(hookSecret);
+    if (!headers['x-signature'] || headers['x-signature'] !== hookSecret) {
+        throw new Error('Invalid webhook signature');
+    }
 
     const transporter = nodemailer.createTransport({
         host: process.env.AWS_MAIL_HOST,
@@ -60,14 +62,14 @@ export async function POST(req: Request, res: Response) {
     };
 
     try {
-        const { user, email_data } = wh.verify(payload, headers);
+        const { user, email_data } = payload;
 
         const data = {
             url: `https://rswrusnvatvaxqlitmqq.supabase.co/v1/verify?token=${email_data.token}&type=${email_data.email_action_type}&redirect_to=${email_data.redirect_to}`,
             subject: subjects[req.headers["accept-language"]]?.[email_data.email_action_type] || "Default Subject",
             action: button_text[req.headers["accept-language"]]?.[email_data.email_action_type] || "Default Action",
             message: body[req.headers["accept-language"]]?.[email_data.email_action_type] || "Default Message",
-          };          
+        };
 
         // Render HTML email
         const emailHtml = await renderAsync(React.createElement(Email, data));
