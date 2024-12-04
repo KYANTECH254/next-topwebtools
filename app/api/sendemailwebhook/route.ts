@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import Email from '../../../components/ui/EmailTemplate';
 import { renderAsync } from '@react-email/components';
-import { Webhook } from "https://esm.sh/standardwebhooks@1.0.0";
+const Webhook = (await import("https://esm.sh/standardwebhooks@1.0.0")).Webhook;
 import React from 'react';
 
 export async function POST(req: Request, res: Response) {
