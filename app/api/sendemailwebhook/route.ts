@@ -1,24 +1,17 @@
 import nodemailer from 'nodemailer';
 import Email from '../../../components/ui/EmailTemplate';
 import { renderAsync } from '@react-email/components';
-// import { Webhook } from 'express-webhook';
+import { Webhook } from "https://esm.sh/standardwebhooks@1.0.0";
 import React from 'react';
-import { createHmac } from 'crypto';
 
 export async function POST(req: Request, res: Response) {
     const secret: any = process.env.SEND_EMAIL_HOOK_SECRET; // Your Supabase webhook secret
-    const payload: any = await req.text(); // Get raw payload from the request
-    const signature = req.headers.get('x-supabase-signature'); // Supabase signature header
+    const payload = await req.text();
+    const headers = Object.fromEntries(req.headers);
     
-    // If the signature includes a timestamp, you might need to validate that here as well
-    const computedSignature = createHmac('sha256', secret)
-      .update(payload) 
-      .digest('hex');
+    // Create a new Webhook instance with your secret
+    const webhook = new Webhook(secret);
     
-    // Compare the received signature with the computed signature
-    if (signature !== computedSignature) {
-      return new Response('Invalid webhook signature', { status: 401 });
-    }
     const transporter = nodemailer.createTransport({
         host: process.env.AWS_MAIL_HOST,
         port: 465,
@@ -66,7 +59,20 @@ export async function POST(req: Request, res: Response) {
     };
 
     try {
-        const { user, email_data } = payload;
+        const { user, email_data } = webhook.verify(payload, headers) as {
+            user: {
+              email: string;
+            };
+            email_data: {
+              token: string;
+              token_hash: string;
+              redirect_to: string;
+              email_action_type: string;
+              site_url: string;
+              token_new: string;
+              token_hash_new: string;
+            };
+          };
 
         const data = {
             url: `https://rswrusnvatvaxqlitmqq.supabase.co/v1/verify?token=${email_data.token}&type=${email_data.email_action_type}&redirect_to=${email_data.redirect_to}`,
