@@ -43,7 +43,7 @@ export function Email(data:any) {
       </Body>
     </Html>
   );
-};
+}
 
 export default Email;
 
