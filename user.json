@@ -1,40 +1,57 @@
-User Info: {
-    id: '727be3f8-8dd7-4e1e-bbec-2da7d704a4fc',
-    aud: 'authenticated',
-    role: 'authenticated',
-    email: 'kyantech254@gmail.com',
-    email_confirmed_at: '2024-12-01T00:41:35.491349Z',
-    phone: '',
-    confirmed_at: '2024-12-01T00:41:35.491349Z',
-    last_sign_in_at: '2024-12-01T13:23:21.658467Z',
-    app_metadata: { provider: 'google', providers: [ 'google' ] },
-    user_metadata: {
-      avatar_url: 'https://lh3.googleusercontent.com/a/ACg8ocLx6fQjAj0X2wd4UUg9Q8-dY6hVPbiNhs-hB6xIQYc761y0eA=s96-c',
-      email: 'kyantech254@gmail.com',
-      email_verified: true,
-      full_name: 'Kyan Tech',
-      iss: 'https://accounts.google.com',
-      name: 'Kyan Tech',
-      phone_verified: false,
-      picture: 'https://lh3.googleusercontent.com/a/ACg8ocLx6fQjAj0X2wd4UUg9Q8-dY6hVPbiNhs-hB6xIQYc761y0eA=s96-c',                                                                              
-      provider_id: '112685064754038539682',
-      sub: '112685064754038539682'
+{
+  "user": {
+    "id": "11397cd3-b517-474e-b387-399ad24e3ca6",
+    "aud": "authenticated",
+    "role": "authenticated",
+    "email": "addittionslearning@gmail.com",
+    "email_confirmed_at": "2024-12-01T00:30:23.070485Z",
+    "phone": "",
+    "confirmation_sent_at": "2024-12-01T00:21:19.045999Z",
+    "confirmed_at": "2024-12-01T00:30:23.070485Z",
+    "recovery_sent_at": "2024-12-01T01:30:11.496393Z",
+    "last_sign_in_at": "2024-12-04T12:40:51.350115Z",
+    "app_metadata": {
+      "provider": "email",
+      "providers": [
+        "email"
+      ]
     },
-    identities: [
+    "user_metadata": {
+      "email": "addittionslearning@gmail.com",
+      "email_verified": false,
+      "full_name": "KyanTech",
+      "phone_verified": false,
+      "sub": "11397cd3-b517-474e-b387-399ad24e3ca6"
+    },
+    "identities": [
       {
-        identity_id: '78e14f82-2e83-49fe-91a7-dcd1699e0985',
-        id: '112685064754038539682',
-        user_id: '727be3f8-8dd7-4e1e-bbec-2da7d704a4fc',
-        identity_data: [Object],
-        provider: 'google',
-        last_sign_in_at: '2024-12-01T00:41:35.487163Z',
-        created_at: '2024-12-01T00:41:35.487239Z',
-        updated_at: '2024-12-01T13:23:11.531843Z',
-        email: 'kyantech254@gmail.com'
+        "identity_id": "01606350-1f05-4701-80c4-b27cc3704d3f",
+        "id": "11397cd3-b517-474e-b387-399ad24e3ca6",
+        "user_id": "11397cd3-b517-474e-b387-399ad24e3ca6",
+        "identity_data": {
+          "email": "addittionslearning@gmail.com",
+          "email_verified": false,
+          "phone_verified": false,
+          "sub": "11397cd3-b517-474e-b387-399ad24e3ca6"
+        },
+        "provider": "email",
+        "last_sign_in_at": "2024-12-01T00:18:26.702036Z",
+        "created_at": "2024-12-01T00:18:26.702086Z",
+        "updated_at": "2024-12-01T00:18:26.702086Z",
+        "email": "addittionslearning@gmail.com"
       }
     ],
-    created_at: '2024-12-01T00:41:35.478814Z',
-    updated_at: '2024-12-01T13:23:21.673177Z',
-    is_anonymous: false
+    "created_at": "2024-12-01T00:18:26.696123Z",
+    "updated_at": "2024-12-04T12:40:51.356243Z",
+    "is_anonymous": false
+  },
+  "email_data": {
+    "token": "543206",
+    "token_hash": "pkce_648ea8b9f0693e1a2019bc1821583ca7d4a06e9f74194a922d573301",
+    "redirect_to": "https://www.topwebtools.serveo.net",
+    "email_action_type": "magiclink",
+    "site_url": "https://rswrusnvatvaxqlitmqq.supabase.co/auth/v1",
+    "token_new": "",
+    "token_hash_new": ""
   }
-  
+}

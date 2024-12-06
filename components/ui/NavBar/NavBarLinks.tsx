@@ -32,9 +32,6 @@ export default function Navlinks({ user }: NavlinksProps) {
           {/* <Link href="/paid-apis" className={s.link}>
             Paid
           </Link> */}
-          <Link href="/docs" className={s.link}>
-            Docs
-          </Link>
           {/* <Link href="/pricing" className={s.link}>
             Pricing
           </Link> */}
@@ -45,6 +42,9 @@ export default function Navlinks({ user }: NavlinksProps) {
               </Link>
               <Link href="/api-credentials" className={s.link}>
                 Api Credentials
+              </Link>
+              <Link href="/docs" className={s.link}>
+                Docs
               </Link>
             </>
           )}
