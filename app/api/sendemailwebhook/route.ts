@@ -101,7 +101,16 @@ export async function POST(req: Request, res: Response) {
         await transporter.sendMail(mailOptions);
         console.log("Email sent successfully.");
 
-        return new Response("Email sent successfully", { status: 200 });
+        return new Response(
+            JSON.stringify({
+                message: 'Email sent successfully.',
+            }),
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        )
     } catch (error) {
         console.error("Error occurred:", error);
         return new Response(
