@@ -30,7 +30,7 @@ export default function Footer() {
             </li>
             <li className="py-3 md:py-0 md:pb-4">
               <Link
-                href="/"
+                href="/about"
                 className="text-white transition duration-150 ease-in-out hover:text-zinc-200"
               >
                 About
@@ -47,7 +47,7 @@ export default function Footer() {
             </li>
             <li className="py-3 md:py-0 md:pb-4">
               <Link
-                href="/"
+                href="/privacy-policy"
                 className="text-white transition duration-150 ease-in-out hover:text-zinc-200"
               >
                 Privacy Policy
@@ -55,7 +55,7 @@ export default function Footer() {
             </li>
             <li className="py-3 md:py-0 md:pb-4">
               <Link
-                href="/"
+                href="/terms"
                 className="text-white transition duration-150 ease-in-out hover:text-zinc-200"
               >
                 Terms of Use

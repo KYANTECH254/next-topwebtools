@@ -23,9 +23,6 @@ export function Email(data:any) {
           <Text style={codeDescription}>
             {data.message}
           </Text>
-          {/* <Section style={codeContainer}>
-            <Heading style={codeStyle}>564873</Heading>
-          </Section> */}
           <Section style={buttonContainer}>
             <Button href={data.url} style={button}>
               {data.action}
