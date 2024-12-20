@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     }
 };
 
-export function AboutPage() {
+export default function AboutPage() {
   return (
     <>
       <main style={mainStyle}>
@@ -94,4 +94,3 @@ const listStyle: CSSProperties = {
   fontSize: "1.2rem",
 };
 
-export default AboutPage;

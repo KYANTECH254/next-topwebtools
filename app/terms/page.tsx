@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 
-export function TermsOfUsePage() {
+export default function TermsOfUsePage() {
   return (
     <>
       <main style={mainStyle}>
@@ -118,5 +118,3 @@ const linkStyle: CSSProperties = {
   color: "lightblue",
   textDecoration: "none",
 };
-
-export default TermsOfUsePage;
