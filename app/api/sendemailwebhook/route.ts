@@ -71,7 +71,7 @@ export async function POST(req: Request, res: Response) {
         console.log("Verifying webhook...");
         const { user, email_data } = webhook.verify(payload, headers) as {
             user: { email: string };
-            email_data: { token: string; email_action_type: string; redirect_to: string };
+            email_data: { token: string; email_action_type: string; redirect_to: string; token_hash:string; };
         };
 
         const emailActionType = email_data.email_action_type as keyof typeof subjects;
@@ -79,7 +79,7 @@ export async function POST(req: Request, res: Response) {
 
         // Explicitly fetch data for English
         const data = {
-            url: `${email_data.redirect_to}/auth/callback?code=${email_data.token}&type=${emailActionType}`,
+            url: `${email_data.redirect_to}/auth/callback?code=${email_data.token}&type=${emailActionType}&token_hash=${email_data.token_hash}`,
             subject: subjects[emailActionType] || "Default Subject",
             action: button_text[emailActionType] || "Default Action",
             message: body[emailActionType] || "Default Message",

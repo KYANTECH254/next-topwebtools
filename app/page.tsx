@@ -1,17 +1,17 @@
 import React, { CSSProperties } from "react";
-import Head from "next/head";
+import { createClient } from '../utils/supabase/server';
+import {
+    getUser
+} from '../utils/supabase/queries';
 
-export default function Page() {
+export default async function Page() {
+    const supabase = createClient();
+    const [user] = await Promise.all([
+        getUser(supabase),
+    ]);
+
     return (
         <>
-            <Head>
-                <title>TopWebTools - API Services for Developers</title>
-                <meta
-                    name="description"
-                    content="Access free and paid APIs including the Deriv Aviator API and Aviator API for provably fair systems."
-                />
-            </Head>
-
             <main style={mainStyle}>
                 {/* Hero Section */}
                 <section style={heroSectionStyle}>
@@ -41,10 +41,10 @@ export default function Page() {
                             <h3>Aviator Provably Fair</h3>
                             <p>Build trust with a transparent and verifiable fair-play system.</p>
                         </div>
-                        <div style={featureCardStyle}>
+                        {/* <div style={featureCardStyle}>
                             <h3>Flexible API Plans</h3>
                             <p>Choose from free or premium options tailored to your project needs.</p>
-                        </div>
+                        </div> */}
                     </div>
                 </section>
 

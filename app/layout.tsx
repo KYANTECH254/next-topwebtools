@@ -6,8 +6,8 @@ import Footer from '../components/ui/Footer';
 import Navbar from '../components/ui/NavBar';
 import { Toaster } from '../components/ui/Toasts/toaster';
 
-const title = 'Topwetools';
-const description = 'All the tools you need.';
+const title = 'TopWebTools - API Services for Developers';
+const description = 'Access free and paid APIs including the Deriv Aviator API and Aviator API for provably fair systems.';
 
 export const metadata: Metadata = {
     title: title,

@@ -5,7 +5,6 @@ import NameForm from '../../components/ui/AccountForms/NameForm';
 import { redirect } from 'next/navigation';
 import { getUser, getUserDetails } from '../../utils/supabase/queries';
 
-
 export default async function Account() {
   const supabase = createClient();
   const [user, userDetails] = await Promise.all([
