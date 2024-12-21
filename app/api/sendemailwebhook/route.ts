@@ -79,7 +79,7 @@ export async function POST(req: Request, res: Response) {
 
         // Explicitly fetch data for English
         const data = {
-            url: `${email_data.redirect_to}/auth/callback?code=${email_data.token}&type=${emailActionType}&token_hash=${email_data.token_hash}`,
+            url: `${email_data.redirect_to}?code=${email_data.token}&type=${emailActionType}&token_hash=${email_data.token_hash}`,
             subject: subjects[emailActionType] || "Default Subject",
             action: button_text[emailActionType] || "Default Action",
             message: body[emailActionType] || "Default Message",

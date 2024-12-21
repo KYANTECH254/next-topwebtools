@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: title,
         description: description,
-        images: ['/favicon/favicon-32x32.png'], 
+        images: ['/favicon/favicon-32x32.png'],
     }
 };
 

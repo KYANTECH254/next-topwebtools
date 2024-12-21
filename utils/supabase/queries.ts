@@ -37,3 +37,12 @@ export const getUserDetails = cache(async (supabase: SupabaseClient) => {
     .single();
   return userDetails;
 });
+
+export const getUserCredentials = cache(async (supabase: SupabaseClient) => {
+  const { data: userCredentials } = await supabase
+    .from('credentials')
+    .select('*')
+    .single();
+  return userCredentials;
+});
+
