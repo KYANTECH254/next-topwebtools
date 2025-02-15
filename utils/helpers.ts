@@ -1,32 +1,9 @@
 import crypto from 'crypto';
 
-export const getURL = (path: string = '') => {
-  // Determine the base URL based on the environment.
-  let url;
-
-  if (process.env.NODE_ENV !== 'production') {
-    // Use localhost during development or testing.
-    url = 'http://localhost:3000';
-  } else {
-    // Use NEXT_PUBLIC_SITE_URL if set and non-empty.
-    url =
-      process?.env?.NEXT_PUBLIC_SITE_URL?.trim() ||
-      // Otherwise, use NEXT_PUBLIC_VERCEL_URL if set.
-      process?.env?.NEXT_PUBLIC_VERCEL_URL?.trim() ||
-      // Default to localhost if nothing is set (fallback safety).
-      'http://localhost:3000';
-  }
-
-  // Trim trailing slashes from the URL.
-  url = url.replace(/\/+$/, '');
-  // Ensure `http` or `https` is included in the URL.
-  url = url.includes('http') ? url : `https://${url}`;
-  // Trim leading slashes from the path to avoid double slashes.
-  path = path.replace(/^\/+/, '');
-
-  // Return the final concatenated URL.
-  return path ? `${url}/${path}` : url;
-};
+export function getURL(path = '') {
+  const baseURL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.topwebtools.online';
+  return `${baseURL}${path}`;
+}
 
 export const postData = async ({
   url,
