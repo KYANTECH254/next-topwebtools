@@ -1,15 +1,47 @@
-// import { toDateTime } from '@/utils/helpers';
-// import { createClient } from '@supabase/supabase-js';
+import { generatePlatformId, generatePublicKey, generateUserId, toDateTime } from '../../utils/helpers';
+import { createClient } from '@supabase/supabase-js';
 
-// // Change to control trial period length
-// const TRIAL_PERIOD_DAYS = 0;
+// Change to control trial period length
+const TRIAL_PERIOD_DAYS = 0;
 
-// // Note: supabaseAdmin uses the SERVICE_ROLE_KEY which you must only use in a secure server-side context
-// // as it has admin privileges and overwrites RLS policies!
-// const supabaseAdmin = createClient<Database>(
-//   process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-//   process.env.SUPABASE_SERVICE_ROLE_KEY || ''
-// );
+// Note: supabaseAdmin uses the SERVICE_ROLE_KEY which you must only use in a secure server-side context
+// as it has admin privileges and overwrites RLS policies!
+const supabaseAdmin = createClient<any>(
+  process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+  process.env.SUPABASE_SERVICE_ROLE_KEY || ''
+);
+
+const insertCredentials = async (userEmail: string) => {
+    try {
+      const userId = generateUserId(); // Generate a random user ID
+      
+      // Insert into credentials table
+      const { data, error } = await supabaseAdmin
+        .from('credentials')
+        .insert([
+          {
+            apiKey: generatePublicKey(),                // Provided API Key
+            platformId: generatePlatformId(), // Generate platform ID (assuming you already have generatePlatformId function)
+            platform: 'deriv',              // Provided platform
+            origin: '',  // Current origin (can be modified as needed)
+            derivId: '',           // Empty derivId as per your requirement
+            type: 1,               // Type set to 1
+            status: 'active',      // Status set to 'active'
+            user_id: userId,       // Generated random user ID
+            user_email: userEmail  // Provided user email
+          }
+        ]);
+  
+      // Check for error
+      if (error) {
+        throw new Error(`Error inserting credentials: ${error.message}`);
+      }
+  
+      console.log('Credentials inserted successfully:', data);
+    } catch (error) {
+      console.error('Error inserting credentials:', error);
+    }
+  };
 
 // const upsertProductRecord = async (product: Stripe.Product) => {
 //   const productData: Product = {
@@ -276,11 +308,12 @@
 //     );
 // };
 
-// export {
+export {
+    insertCredentials,
 //   upsertProductRecord,
 //   upsertPriceRecord,
 //   deleteProductRecord,
 //   deletePriceRecord,
 //   createOrRetrieveCustomer,
 //   manageSubscriptionStatusChange
-// };
+};

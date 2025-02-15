@@ -1,13 +1,15 @@
 import React, { CSSProperties } from "react";
 import { createClient } from '../utils/supabase/server';
 import {
-    getUser
+    getUser,
+    getUserCredentials
 } from '../utils/supabase/queries';
 
 export default async function Page() {
     const supabase = createClient();
-    const [user] = await Promise.all([
+    const [user, credentials] = await Promise.all([
         getUser(supabase),
+        getUserCredentials(supabase)
     ]);
 
     return (

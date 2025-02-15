@@ -1,3 +1,5 @@
+import crypto from 'crypto';
+
 export const getURL = (path: string = '') => {
   // Determine the base URL based on the environment.
   let url;
@@ -131,3 +133,15 @@ export const getErrorRedirect = (
     disableButton,
     arbitraryParams
   );
+
+export const generatePlatformId = (): string => {
+  return crypto.randomBytes(16).toString('hex'); 
+};
+
+export const generatePublicKey = (): string => {
+  return crypto.randomBytes(32).toString('hex'); 
+};
+
+export const generateUserId = (): string => {
+  return crypto.randomBytes(5).toString('hex');
+};

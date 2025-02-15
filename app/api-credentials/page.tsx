@@ -1,23 +1,30 @@
 import { createClient } from '../../utils/supabase/server';
 import { redirect } from 'next/navigation';
-import { getUser, getUserDetails } from '../../utils/supabase/queries';
+import { getUser, getUserDetails,getUserCredentials } from '../../utils/supabase/queries';
 import PublicKey from '../../components/ui/CredentialsForms/PublicKey';
 import PlartFormID from '../../components/ui/CredentialsForms/PlartformId';
 import DerivID from '../../components/ui/CredentialsForms/DerivID';
 import Origins from '../../components/ui/CredentialsForms/Origins';
+import { insertCredentials } from '../../utils/supabase/admin';
 
 
 export default async function Credentials() {
   const supabase = createClient();
-  const [user, userDetails] = await Promise.all([
+  const [user, userDetails,credentials] = await Promise.all([
     getUser(supabase),
     getUserDetails(supabase),
+    getUserCredentials(supabase)
   ]);
 
   if (!user) {
     return redirect('/signin');
   }
-  console.log("User Info:",user)
+
+  if (!credentials || !user) {
+    await insertCredentials(user.email as string);
+  }
+
+  console.log("User Info:",user, "Credentials:",credentials)
 
   return (
     <section className="mb-32 bg-black">
@@ -29,11 +36,10 @@ export default async function Credentials() {
         </div>
       </div>
       <div className="p-4">
-        
-        <PublicKey userName={user?.user_metadata.full_name ?? ''} />
-        <PlartFormID userName={user?.user_metadata.full_name ?? ''} />
-        <DerivID userName={user?.user_metadata.full_name ?? ''} />
-        <Origins userName={user?.user_metadata.full_name ?? ''} />
+        <PublicKey userName={credentials?.apiKey ?? ''} />
+        <PlartFormID userName={credentials?.platformId ?? ''} />
+        <DerivID userName={credentials?.derivId ?? ''} />
+        <Origins userName={credentials?.origin ?? ''} />
       </div>
     </section>
   );
